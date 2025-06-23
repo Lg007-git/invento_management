@@ -15,7 +15,7 @@ export default function RegisterForm({ switchToLogin }) {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/register", {
+      await axios.post("https://invento-management.onrender.com/api/register", {
         username,
         password,
       });

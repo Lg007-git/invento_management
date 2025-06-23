@@ -21,7 +21,7 @@ const handleSubmit = async (e) => {
 
     try {
         console.log("Adding product:", { name, price, option, image });
-        const res = await axios.post("http://localhost:5000/api/products", formData, {
+        const res = await axios.post("https://invento-management.onrender.com/api/products", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "x-crud-token": localStorage.getItem("crudToken"), 

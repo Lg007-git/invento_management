@@ -17,7 +17,7 @@
       if (!token) return;
       const fetchProducts = async () => {
         try {
-          const res = await axios.get("http://localhost:5000/api/products",{
+          const res = await axios.get("https://invento-management.onrender.com/api/products",{
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -33,7 +33,7 @@
     const handleCrudLogin = async () => {
       try {
         const res = await axios.post(
-          "http://localhost:5000/api/crudlogin",
+          "https://invento-management.onrender.com/api/crudlogin",
           { crudPassword },
           {
             headers: {
