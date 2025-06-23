@@ -7,7 +7,7 @@ const [name, setName] = useState("");
 const [price, setPrice] = useState("");
 const [option, setOption] = useState("");
 const [image, setImage] = useState(null);
-cosnt [norm,setNorm] = useState("");
+
 
 const handleSubmit = async (e) => {
     // what
