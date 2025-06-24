@@ -62,7 +62,8 @@
 
     return (
       <div style={{padding: "2rem" }}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", flexDirection: "column",gap:"-2rem",justifyContent: "space-between" }}>
+          <div style={{ display: "flex", justifyContent: "space-between",marginBottom:"0.1rem" }}>
           <h2>Your Products</h2>
           <form
               onSubmit={(e) => {
@@ -85,6 +86,8 @@
                 }}
               />
             </form>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between",marginBottom:"1rem" }}>
           {(!crudMode)?
           <Button onClick={() => setOpen(true)} variant="outlined">
             Admin Login
@@ -99,7 +102,7 @@
                     Add Product
               </Button>
             )}
-
+            </div>
             <AddProduct
                   open={showAddDialog}
                   onClose={() => setShowAddDialog(false)}
