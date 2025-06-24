@@ -12,7 +12,8 @@
     const [open, setOpen] = useState(false);
     const token = localStorage.getItem("token");
     const [showAddDialog, setShowAddDialog] = useState(false);
-
+    const [searchQuery, setSearchQuery] = useState(""); // ✅ new state
+    
     useEffect(() => {
       if (!token) return;
       const fetchProducts = async () => {
@@ -54,10 +55,36 @@
       }
     };
 
+    const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
     return (
       <div style={{padding: "2rem" }}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <h2>Your Products</h2>
+          <form
+              onSubmit={(e) => {
+                e.preventDefault(); // Prevent page reload
+                // You can optionally trigger something here if needed
+              }}
+            >
+              <TextField
+                label="Search"
+                variant="outlined"
+                color="white"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                sx={{ width: "10rem" }}
+                slotProps={{inputLabel: {sx: { color: "white" }, },}} // ✅ Label color} // Also ensures label color is white
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault(); // Ensure no form submission/reload
+                  }
+                }}
+              />
+            </form>
           {(!crudMode)?
           <Button onClick={() => setOpen(true)} variant="outlined">
             Admin Login
@@ -87,7 +114,7 @@
           <p>No products found.</p>
         ) : (
           <Grid container spacing={3}>
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <Grid item key={product._id} xs={12} sm={6} md={4}>
               <ProductCard product={product} crudMode={crudMode} />
             </Grid>

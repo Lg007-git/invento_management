@@ -54,7 +54,7 @@ const handleSubmit = async (e) => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 400,
+          width: '20rem',
           bgcolor: 'white',
           boxShadow: 24,
           borderRadius: 2,
@@ -101,7 +101,7 @@ const handleSubmit = async (e) => {
             margin="normal"
             required
           />
-          
+
           <input
             type="file"
             onChange={(e) => setImage(e.target.files[0])}
