@@ -26,6 +26,9 @@ export default function ProductCard({ product, crudMode }) {
         <Typography variant="body2" color="text.secondary">
           Option: {product.category}
         </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Extra_Info: {product.extraInfo}
+        </Typography>
 
         {crudMode && (
           <Box sx={{ mt: 2 }}>

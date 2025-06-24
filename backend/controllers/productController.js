@@ -43,7 +43,7 @@ const getProducts = async (req, res) => {
 // CREATE product (with Cloudinary image upload)
 const createProduct = async (req, res) => {
   try {
-    const { name, price, category } = req.body;
+    const { name, price, category,extraInfo } = req.body;
 
     if (!req.file) {
       return res.status(400).json({ msg: "Image file is required" });
@@ -62,7 +62,9 @@ const createProduct = async (req, res) => {
       price,
       category,
       imageUrl: result.secure_url,
+      extraInfo,
       userId: req.user.id,
+
     });
 
     await product.save();

@@ -7,7 +7,7 @@ const [name, setName] = useState("");
 const [price, setPrice] = useState("");
 const [option, setOption] = useState("");
 const [image, setImage] = useState(null);
-
+const [extraInfo,setExtraInfo] =useState("");
 
 const handleSubmit = async (e) => {
     // what
@@ -18,6 +18,7 @@ const handleSubmit = async (e) => {
     formData.append("price", price);    
     formData.append("category", option);
     formData.append("image", image);
+    formData.append("extraInfo",extraInfo);
 
     try {
         console.log("Adding product:", { name, price, option, image });
@@ -37,6 +38,7 @@ const handleSubmit = async (e) => {
       setPrice("");
       setOption("");
       setImage(null);
+      setExtraInfo("");
     } catch (err) {
         console.error("Failed to add product:", err.response?.data || err.message);
       console.error(err);
@@ -90,6 +92,16 @@ const handleSubmit = async (e) => {
             margin="normal"
             required
           />
+          <TextField
+            label ="Extra_Info"
+            type= "string"
+            fullWidth
+            value ={extraInfo}
+            onChange={(e) => setExtraInfo(e.target.value)}
+            margin="normal"
+            required
+          />
+          
           <input
             type="file"
             onChange={(e) => setImage(e.target.files[0])}

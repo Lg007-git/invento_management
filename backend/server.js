@@ -6,6 +6,12 @@ const cors = require("cors");
 dotenv.config();
 const app = express();
 
+// app.use(cors({
+//   origin: ["https://invento-management.vercel.app/"], // ✅ Your deployed frontend URL
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type", "Authorization", "x-crud-token"],
+//   credentials: true,
+// }));
 app.use(cors());
 app.use('/uploads', express.static('uploads'));
 app.use(express.json());
