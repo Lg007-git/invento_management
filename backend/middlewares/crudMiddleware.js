@@ -14,6 +14,6 @@ const crudMiddleware = (req, res, next) => {
   } catch (err) {
     res.status(401).json({ msg: "Invalid CRUD token" });
   }
-};
+};  
 
 module.exports = crudMiddleware;

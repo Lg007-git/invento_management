@@ -14,7 +14,7 @@ export default function LoginForm({ switchToRegister }) {
       });
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("username", res.data.username);
-      alert("Login successful");
+      // alert("Login successful");
       window.location.href = "/dashboard";
     } catch (err) {
       alert(err.response?.data?.msg || "Login failed");
