@@ -30,7 +30,7 @@ const handleSubmit = async (e) => {
         },
       });
 
-       console.log("Add product response:", res.data);
+      console.log("Add product response:", res.data);
 
       onProductAdded(res.data); // Pass new product to parent
       onClose(); // Close modal

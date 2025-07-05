@@ -100,7 +100,7 @@ input[type="password"] {
   border: none;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.15);
-  color: white;
+  /* color: white; */
   outline: none;
   transition: all 0.2s ease-in-out;
 }

@@ -113,7 +113,7 @@ const createProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   const { id } = req.params;
-  const { name, price, category } = req.body;
+  const { name, price, category, extraInfo } = req.body;
 
   try {
     const product = await Products.findOne({ _id: id, userId: req.user.id });
@@ -130,6 +130,7 @@ const updateProduct = async (req, res) => {
     product.name = name;
     product.price = price;
     product.category = category;
+    product.extraInfo = extraInfo ;
     product.imageUrl = imageUrl;
 
     const updated = await product.save();

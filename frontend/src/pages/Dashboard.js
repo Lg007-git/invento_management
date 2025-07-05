@@ -3,6 +3,7 @@
   import {Button,Modal,Box,Typography,TextField,Grid} from "@mui/material";
   import ProductCard from "../components/Cards.js";
   import AddProduct from "../components/AddProduct.js";
+  import EditProduct from "../components/EditProduct";  
 
 
   function Dashboard() {
@@ -13,7 +14,9 @@
     const token = localStorage.getItem("token");
     const [showAddDialog, setShowAddDialog] = useState(false);
     const [searchQuery, setSearchQuery] = useState(""); // ✅ new state
-    
+    const [editingProduct, setEditingProduct] = useState(null);
+
+
     useEffect(() => {
       if (!token) return;
       const fetchProducts = async () => {
@@ -30,6 +33,32 @@
       };
       fetchProducts();
     }, [token]);
+
+
+    const handleDelete = async (productId) => {
+          if (!window.confirm("Are you sure you want to delete this product?")) return;
+
+          try {
+            const crudToken = localStorage.getItem("crudToken");
+            await axios.delete(`https://invento-management.onrender.com/api/products/${productId}`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "x-crud-token": crudToken, // if your backend expects it, else remove this
+              },
+            });
+
+            // Remove from state
+            setProducts(prev => prev.filter(p => p._id !== productId));
+          } catch (err) {
+            console.error("❌ Delete Error:", err);
+            alert("Error deleting product");
+          }
+    };
+
+    const handleEdit = (product) => {
+        setEditingProduct(product);
+      };
+
 
     const handleCrudLogin = async () => {
       try {
@@ -119,7 +148,12 @@
           <Grid container spacing={3}>
           {filteredProducts.map((product) => (
             <Grid item key={product._id} xs={12} sm={6} md={4}>
-              <ProductCard product={product} crudMode={crudMode} />
+              <ProductCard 
+                    product={product} 
+                    crudMode={crudMode} 
+                    onEdit={handleEdit}
+                    onDelete={() => handleDelete(product._id)}                    
+              />
             </Grid>
           ))}
         </Grid>
@@ -146,6 +180,18 @@
           
 
         </Modal>
+        <EditProduct
+                open={!!editingProduct}
+                onClose={() => setEditingProduct(null)}
+                token={token}
+                product={editingProduct}
+                onProductUpdated={(updatedProduct) =>
+                  setProducts((prev) =>
+                    prev.map((p) => (p._id === updatedProduct._id ? updatedProduct : p))
+                  )
+                }
+            />
+
       </div>
     );
   }

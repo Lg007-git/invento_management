@@ -11,7 +11,7 @@ const crudMiddleware = require("../middlewares/crudMiddleware.js");
 router.post("/products",authMiddleware,crudMiddleware,upload.single("image"), createProduct); // <-- this handles image upload
 router.get("/products", authMiddleware, getProducts);
 // router.post("/products", authMiddleware, crudMiddleware, createProduct);
-router.put("/products/:id", authMiddleware, crudMiddleware, updateProduct);
+router.put("/products/:id", authMiddleware, crudMiddleware, upload.single("image"), updateProduct);
 router.delete("/products/:id", authMiddleware, crudMiddleware, deleteProduct);
 
 
