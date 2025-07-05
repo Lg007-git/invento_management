@@ -49,7 +49,7 @@ const crudLogin = async (req, res) => {
 };
 
 const register = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, crudPassword } = req.body;
   try {
     const userExists = await Users.findOne({ username });
     if (userExists) return res.status(400).json({ msg: "Username already exists" });
@@ -60,6 +60,7 @@ const register = async (req, res) => {
     const user = new Users({
       username,
       password: hashedPassword,
+      crudPassword : await bcrypt.hash(crudPassword, 10),
     });
 
     await user.save();

@@ -6,6 +6,7 @@ export default function RegisterForm({ switchToLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [crudPassword, setCrudPassword] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -13,11 +14,13 @@ export default function RegisterForm({ switchToLogin }) {
       alert("Passwords do not match");
       return;
     }
+    if (crudPassword.length < 4){ alert("Too short"); return;}
 
     try {
       await axios.post("https://invento-management.onrender.com/api/register", {
         username,
         password,
+        crudPassword,
       });
       alert("Registration successful. Now login.");
       switchToLogin(); // Automatically switch to login after successful register
@@ -55,6 +58,15 @@ export default function RegisterForm({ switchToLogin }) {
           className="w-full px-3 py-2 border rounded"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+        <br />
+        <input
+          type="password"
+          placeholder="CRUD Password"
+          className="w-full px-3 py-2 border rounded"
+          value={crudPassword}
+          onChange={(e) => setCrudPassword(e.target.value)}
           required
         />
         <br />
